@@ -1,0 +1,31 @@
+{
+  "name": "curso-ui5-opensap-pt2",
+  "version": "1.0.0",
+  "description": "Curso UI5 parte 2 - opensap",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicolasapb/curso-ui5-opensap-pt2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nicolasapb/curso-ui5-opensap-pt2/issues"
+  },
+  "homepage": "https://github.com/nicolasapb/curso-ui5-opensap-pt2#readme",
+  "dependencies": {
+    "@openui5/sap.m": "^1.52.5",
+    "@openui5/sap.ui.core": "^1.52.5",
+    "@openui5/sap.ui.layout": "^1.58.1",
+    "@openui5/themelib_sap_belize": "^1.52.5",
+    "@types/jquery": "^3.3.6",
+    "@types/openui5": "^1.40.2"
+  },
+  "devDependencies": {
+    "@ui5/cli": "^0.1.0",
+    "eslint": "^4.19.1"
+  }
+}
