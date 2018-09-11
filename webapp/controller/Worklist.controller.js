@@ -12,6 +12,12 @@ sap.ui.define([
 
 			formatter: formatter,
 
+			_mFilters: {
+				cheap: [new Filter("Price", FilterOperator.LE, 100)],
+				moderate: [new Filter("Price", FilterOperator.BT, 101, 999)],
+				expensive: [new Filter("Price", FilterOperator.GE, 1000)]
+			},
+
 			/* =========================================================== */
 			/* lifecycle methods                                           */
 			/* =========================================================== */
@@ -39,10 +45,12 @@ sap.ui.define([
 					shareSendEmailSubject: this.getResourceBundle().getText("shareSendEmailWorklistSubject"),
 					shareSendEmailMessage: this.getResourceBundle().getText("shareSendEmailWorklistMessage", [location.href]),
 					tableNoDataText : this.getResourceBundle().getText("tableNoDataText"),
-					tableBusyDelay : 0
+					tableBusyDelay : 0,
+					cheap: 0,
+					moderate: 0,
+					expensive: 0
 				});
-				this.setModel(oViewModel, "worklistView");
-
+				this.setModel(oViewModel, "worklistView"); 
 				// Make sure, busy indication is showing immediately so there is no
 				// break after the busy indication for loading the view's meta data is
 				// ended (see promise 'oWhenMetadataIsLoaded' in AppController)
@@ -70,10 +78,25 @@ sap.ui.define([
 				var sTitle,
 					oTable = oEvent.getSource(),
 					iTotalItems = oEvent.getParameter("total");
-				// only update the counter if the length is final and
+				
+				var oModel = this.getModel();
+				var oViewModel = this.getModel("worklistView");
+				
+					// only update the counter if the length is final and
 				// the table is not empty
 				if (iTotalItems && oTable.getBinding("items").isLengthFinal()) {
-					sTitle = this.getResourceBundle().getText("worklistTableTitleCount", [iTotalItems]);
+					sTitle = this.getResourceBundle().getText("worklistTableTitleCount", [iTotalItems]); 
+					jQuery.each(this._mFilters, function(sKey, oFilter){
+						oModel.read("/ProductSet/$count", {
+							filters: oFilter,
+							success: function(oData) {
+								var sPath = "/" + sKey.toLowerCase();
+								console.log('entrou', sPath, oViewModel);
+								oViewModel.setProperty(sPath, oData);
+							}
+						})
+					});
+
 				} else {
 					sTitle = this.getResourceBundle().getText("worklistTableTitle");
 				}
@@ -129,6 +152,26 @@ sap.ui.define([
 				oTable.getBinding("items").refresh();
 			},
 
+			
+			onQuickFilter: function(oEvent) {
+				
+				var oItems = this.byId("table").getBinding("items");
+				var sKey = '';
+				sKey = oEvent.getParameter("key");
+				var aFilters = this._mFilters[sKey.toLowerCase()];
+
+				// if (sKey === 'Cheap') {
+				// 	aFilters.push(new Filter("Price", FilterOperator.LE, 100))
+				// } else if (sKey === 'Moderate') {
+				// 	aFilters.push(new Filter("Price", FilterOperator.BT, 101, 999))
+				// } else if (sKey === 'Expensive') {
+				// 	aFilters.push(new Filter("Price", FilterOperator.GE, 1000))
+				// };
+				
+
+				oItems.filter(aFilters);
+			},
+
 			/* =========================================================== */
 			/* internal methods                                            */
 			/* =========================================================== */
@@ -147,7 +190,7 @@ sap.ui.define([
 
 			/**
 			 * Internal helper method to apply both filter and search state together on the list binding
-			 * @param {sap.ui.model.Filter[]} aTableSearchState An array of filters for the search
+			 * @param {Filter[]} aTableSearchState An array of filters for the search
 			 * @private
 			 */
 			_applySearch: function(aTableSearchState) {
