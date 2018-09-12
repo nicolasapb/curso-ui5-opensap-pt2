@@ -1,0 +1,28 @@
+<mvc:View 
+    xmlns="sap.m" 
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form">
+
+    <Panel
+        class="sapUiResponsiveMargin"
+        width="auto"
+        expandable="{device>/system/phone}"
+        expanded="true"
+        headerText="{i18n>prodcutDetailsPanel1}">
+        <content>
+            <f:SimpleForm 
+                id="ProductForm"
+                layout="ResponsiveGridLayout">
+                <f:content>
+                    <Label text="{i18n>ProductFormCategory}"/>
+                    <Text text="{Category}"/>
+                    <Label text="{i18n>ProductFormName}"/>
+                    <Text text="{Name}"/>
+                    <Label text="{i18n>ProductFormWeight}"/>
+                    <Text text="{= ${WeightMeasure} + ' ' + ${WeightUnit}}"/>
+                </f:content>
+            </f:SimpleForm>
+        </content>
+    </Panel>
+
+</mvc:View>    
