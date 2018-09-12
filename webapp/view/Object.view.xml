@@ -22,7 +22,9 @@
 					path: 'Price',
 					formatter: '.formatter/numberUnit'
 				}"
-				numberUnit="{CurrencyCode}">
+				numberUnit="{CurrencyCode}"
+				titleActive="true"
+				titlePress="onShowDetailPopover">
 			<attributes>
 				<ObjectAttribute text="{SupplierName}"/>
 			</attributes>

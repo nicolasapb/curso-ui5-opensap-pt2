@@ -2,6 +2,7 @@
 	controllerName="opensap.manageproducts.ManageProducts.controller.Worklist"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
 	xmlns:semantic="sap.f.semantic">
 
 	<semantic:SemanticPage
@@ -104,7 +105,9 @@
 								<cells>
 									<ObjectIdentifier
 										title="{ProductID}"
-										text="{Name}"/>
+										text="{Name}"
+										titleActive="true"
+										titlePress="onShowDetailPopover"/>
 									<Text
 										text="{SupplierName}"/>
 									<Link 
@@ -129,8 +132,7 @@
 		<semantic:sendEmailAction>
 			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
 		</semantic:sendEmailAction>
-
-
+ 
 	</semantic:SemanticPage>
 
 </mvc:View>
