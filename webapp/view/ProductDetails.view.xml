@@ -1,4 +1,5 @@
 <mvc:View 
+	controllerName="opensap.manageproducts.ManageProducts.controller.ProductDetails"
     xmlns="sap.m" 
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:f="sap.ui.layout.form">
@@ -14,8 +15,8 @@
                 id="ProductForm"
                 layout="ResponsiveGridLayout">
                 <f:content>
-                    <Label text="{i18n>ProductFormCategory}"/>
-                    <Text text="{Category}"/>
+                    <Label id="categoryLabel" text="{i18n>ProductFormCategory}"/>
+                    <Text id="category" text="{Category}"/>
                     <Label text="{i18n>ProductFormName}"/>
                     <Text text="{Name}"/>
                     <Label text="{i18n>ProductFormWeight}"/>
