@@ -2,6 +2,7 @@
 	controllerName="opensap.manageproducts.ManageProducts.controller.Object"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form"
 	xmlns:semantic="sap.m.semantic">
 
 	<semantic:FullscreenPage
@@ -25,6 +26,60 @@
 				<ObjectAttribute text="{SupplierName}"/>
 			</attributes>
 			</ObjectHeader>
+			<Panel
+				class="sapUiResponsiveMargin"
+				width="auto"
+				expandable="{device>/system/phone}"
+				expanded="true"
+				headerText="{i18n>prodcutDetailsPanel1}">
+				<content>
+					<f:SimpleForm 
+						id="ProductForm"
+						layout="ResponsiveGridLayout">
+						<f:content>
+							<Label text="{i18n>ProductFormCategory}"/>
+							<Text text="{Category}"/>
+							<Label text="{i18n>ProductFormName}"/>
+							<Text text="{Name}"/>
+							<Label text="{i18n>ProductFormWeight}"/>
+							<Text text="{= ${WeightMeasure} + ' ' + ${WeightUnit}}"/>
+						</f:content>
+					</f:SimpleForm>
+				</content>
+			</Panel>
+			<Panel
+				class="sapUiResponsiveMargin"
+				width="auto"
+				expandable="{device>/system/phone}"
+				expanded="false"
+				headerText="{i18n>prodcutDetailsPanel2}">
+				<content>  
+					<List 
+						id="SupplierList" >
+						<items>
+							<StandardListItem icon="sap-icon://building" title="{ToSupplier/CompanyName}"/>
+							<StandardListItem icon="sap-icon://email" title="{ToSupplier/EmailAddress}"/>
+							<StandardListItem icon="sap-icon://world" title="{ToSupplier/WebAddress}"/>
+							<StandardListItem icon="sap-icon://call" title="{ToSupplier/PhoneNumber}"/>
+							<StandardListItem icon="sap-icon://map" title="{ToSupplier/Address/City}"/>
+						</items>
+					</List>				
+				</content>
+			</Panel>
+			<Panel
+				class="sapUiResponsiveMargin sapUiHideOnPhone"
+				width="auto"
+				headerText="{i18n>prodcutDetailsPanel3}">
+				<Image src="{
+					parts: [
+						'ToSupplier/Address/Street',
+						'ToSupplier/Address/PostalCode',
+						'ToSupplier/Address/City',
+						'ToSupplier/Address/Country'
+					],
+					formatter: '.formatter.formatMapUrl'
+				}" />
+			</Panel>
 		</semantic:content>
 
 	</semantic:FullscreenPage>

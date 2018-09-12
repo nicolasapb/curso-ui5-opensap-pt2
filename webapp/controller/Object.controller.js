@@ -31,7 +31,7 @@ sap.ui.define([
 				var iOriginalBusyDelay,
 					oViewModel = new JSONModel({
 						busy : true,
-						delay : 0
+						delay: 0
 					});
 
 				this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
@@ -98,7 +98,10 @@ sap.ui.define([
 					oDataModel = this.getModel();
 
 				this.getView().bindElement({
-					path: sObjectPath,
+					path: sObjectPath, 
+					parameters: {
+						expand: 'ToSupplier'
+					},
 					events: {
 						change: this._onBindingChange.bind(this),
 						dataRequested: function () {

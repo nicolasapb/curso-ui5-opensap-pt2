@@ -90,8 +90,7 @@ sap.ui.define([
 						oModel.read("/ProductSet/$count", {
 							filters: oFilter,
 							success: function(oData) {
-								var sPath = "/" + sKey.toLowerCase();
-								console.log('entrou', sPath, oViewModel);
+								var sPath = "/" + sKey.toLowerCase(); 
 								oViewModel.setProperty(sPath, oData);
 							}
 						})
