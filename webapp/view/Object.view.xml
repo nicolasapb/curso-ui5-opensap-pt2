@@ -29,6 +29,15 @@
 				<ObjectAttribute text="{SupplierName}"/>
 				<ObjectAttribute text="{Description}"/>
 			</attributes>
+			<statuses>
+				<ObjectStatus text="{
+					parts: [
+						{path: 'WeightUnit'},
+						{path: 'WeightMeasure'}
+					],
+					formatter : '.formatter.delivery'
+				}"/>
+			</statuses>
 			</ObjectHeader>
 
 			<mvc:XMLView 
