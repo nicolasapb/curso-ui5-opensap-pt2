@@ -1,7 +1,9 @@
 sap.ui.define([
     "opensap/manageproducts/ManageProducts/controller/BaseController", 
-    "sap/ui/core/routing/History",
-], function (BaseController, History) {
+    "sap/ui/core/routing/History", 
+    "sap/m/MessageToast"
+], function( BaseController, History, MessageToast ) {
+
     "use strict";
     return BaseController.extend("opensap.manageproducts.ManageProducts.Add.controller", {
 
@@ -16,6 +18,8 @@ sap.ui.define([
          * @public
          */
         onNavBack : function() {
+            this.getModel().deleteCreatedEntry(this._oContext);
+
             var sPreviousHash = History.getInstance().getPreviousHash();
 
             if (sPreviousHash !== undefined) {
@@ -23,6 +27,14 @@ sap.ui.define([
             } else {
                 this.getRouter().navTo("worklist", {}, true);
             }
+        },
+
+        onSave: function() {
+            this.getModel().submitChanges();
+        },
+
+        onCancel: function() {
+            this.onNavBack();
         },
         
         _onObjectMatched: function() {
@@ -34,18 +46,40 @@ sap.ui.define([
 
         _onMetadataLoaded: function() {
             var oProperties = {
-                ProductID: "" + parseInt(Math.random() * 1000000000),
-                TypeCode: "PR",
-                TaxTarifCode: "1",
-                CurrencyCode: "EUR",
-                MeasureUnit: "EA"
+				ProductID: "" + parseInt(Math.random() * 1000000000, 10),
+				TypeCode: "PR",
+				TaxTarifCode: 1,
+				CurrencyCode: "EUR",
+				MeasureUnit: "EA"
+
             };
 
             var oContext = this.getModel().createEntry("/ProductSet", {
-                properties: oProperties
+                properties: oProperties,
+                success: this._onCreateSuccess.bind(this)
             });
 
             this.getView().setBindingContext(oContext);
+        },
+
+        _onCreateSuccess: function(oProduct) {
+
+            // navigate to the new product's object view
+            var sId = oProduct.ProductID;
+
+            this.getRouter().navTo("object", {
+                objectId: sId
+            }, true);
+
+			// unbind the view to not show this object again
+			this.getView().unbindObject();
+
+            // show success messge
+            var sMessage = this.getResourceBundle().getText("newObjectCreated", [oProduct.Name]);
+
+            MessageToast.show(sMessage, {
+                closeOnBrowserNavigation: false
+            });
         }
     });
 

@@ -72,9 +72,7 @@
 				"dataSource": "mainService",
 				"preload": true,
 				"settings": {
-					"metadataUrlParams": {
-						"defaultBindingMode": "TwoWay"
-					}
+					"defaultBindingMode": "TwoWay"
 				}
 			}
 		},
