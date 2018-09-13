@@ -1,11 +1,13 @@
 /*global location history */
 sap.ui.define([
-		"opensap/manageproducts/ManageProducts/controller/BaseController",
-		"sap/ui/model/json/JSONModel",
-		"opensap/manageproducts/ManageProducts/model/formatter",
-		"sap/ui/model/Filter",
-		"sap/ui/model/FilterOperator"
-	], function (BaseController, JSONModel, formatter, Filter, FilterOperator) {
+	"opensap/manageproducts/ManageProducts/controller/BaseController", 
+	"sap/ui/model/json/JSONModel", 
+	"opensap/manageproducts/ManageProducts/model/formatter", 
+	"sap/ui/model/Filter", 
+	"sap/ui/model/FilterOperator", 
+	"sap/m/MessageToast"
+], function( BaseController, JSONModel, formatter, Filter, FilterOperator, MessageToast ) {
+
 		"use strict";
 
 		return BaseController.extend("opensap.manageproducts.ManageProducts.controller.Worklist", {
@@ -187,6 +189,25 @@ sap.ui.define([
 			 */
 			onAdd: function() {
 				this.getRouter().navTo("add");
+			},
+
+			/**
+			 * Event handler for the delete button. Will delete the product from the model.
+			 * @public
+			 */
+			onDeleteProduct: function (oEvent) {
+				var oColumnListItem = oEvent.getSource().getParent(),
+					sProductName = oColumnListItem.getBindingContext().getProperty("Name"),
+					sPath = oColumnListItem.getBindingContextPath();
+
+				this.getModel().remove(sPath, {
+					success: function () {
+						MessageToast.show(this.getResourceBundle().getText("worklistDeleteProductSuccess", [sProductName]));
+					}.bind(this),
+					error: function () {
+						MessageToast.show(this.getResourceBundle().getText("worklistDeleteProductError", [sProductName]));
+					}.bind(this)
+				});
 			},
 
 			/* =========================================================== */

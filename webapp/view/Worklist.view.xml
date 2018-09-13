@@ -94,8 +94,11 @@
 								minScreenWidth="tablet">
 								<Text text="{i18n>tablewebAddressColumnTitle}" id="webAddressColumnTitle"/>
 							</Column> 
-							<Column id="unitNumberColumn" hAlign="End" sortProperty="Price">
+							<Column id="unitNumberColumn" hAlign="End">
 								<Text text="{i18n>tableUnitNumberColumnTitle}" id="unitNumberColumnTitle"/>
+							</Column>
+							<Column id="actionColumn" width="2.5rem" vAlign="Middle">
+								<Text text="{i18n>tableActionColumnTitle}" id="actionColumnTitle"/>
 							</Column>
 						</columns>
 
@@ -121,6 +124,7 @@
 											formatter: '.formatter.numberUnit'
 										}"
 										unit="{CurrencyCode}"/>
+									<Button id="delete" press="onDeleteProduct" icon="sap-icon://delete"/>
 								</cells>
 							</ColumnListItem>
 						</items>
