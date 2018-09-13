@@ -181,20 +181,27 @@ sap.ui.define([
 				oPopover.openBy(oOpener);
 			},
 
-			_getPopover: function() {
-				if (!this._oPopover) {
-					this._oPopover = sap.ui.xmlfragment(
-						'opensap.manageproducts.ManageProducts.view.DimensionPopover', 
-						this);
-					this.getView().addDependent(this._oPopover);
-				}	
-
-				return this._oPopover;
+			/**
+			 * Event handler when the Add button gets pressed
+			 * @public
+			 */
+			onAdd: function() {
+				this.getRouter().navTo("add");
 			},
 
 			/* =========================================================== */
 			/* internal methods                                            */
 			/* =========================================================== */
+			_getPopover: function () {
+				if (!this._oPopover) {
+					this._oPopover = sap.ui.xmlfragment(
+						'opensap.manageproducts.ManageProducts.view.DimensionPopover',
+						this);
+					this.getView().addDependent(this._oPopover);
+				}
+
+				return this._oPopover;
+			},
 
 			/**
 			 * Shows the selected item on the object page

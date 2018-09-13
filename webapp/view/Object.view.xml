@@ -27,6 +27,7 @@
 				titlePress="onShowDetailPopover">
 			<attributes>
 				<ObjectAttribute text="{SupplierName}"/>
+				<ObjectAttribute text="{Description}"/>
 			</attributes>
 			</ObjectHeader>
 

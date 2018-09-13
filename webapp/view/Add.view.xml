@@ -1,0 +1,20 @@
+<mvc:View 
+    xmlns="sap.m" 
+    xmlns:mvc="sap.ui.core.mvc" 
+	xmlns:f="sap.ui.layout.form"
+	xmlns:semantic="sap.m.semantic"
+    controllerName="opensap.manageproducts.ManageProducts.controller.Add">
+
+    <semantic:FullscreenPage
+		id="addProduct"
+		navButtonPress="onNavBack"
+		showNavButton="true" 
+		title="{i18n>addProductTitle}">
+
+		<semantic:content> 
+
+		</semantic:content>
+
+	</semantic:FullscreenPage>
+
+</mvc:View>

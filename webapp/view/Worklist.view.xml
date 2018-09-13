@@ -74,6 +74,7 @@
 									search="onSearch"
 									width="auto">
 								</SearchField>
+								<Button id="addButton" icon="sap-icon://add" press="onAdd"/>
 							</Toolbar>
 						</headerToolbar>
 
@@ -93,7 +94,7 @@
 								minScreenWidth="tablet">
 								<Text text="{i18n>tablewebAddressColumnTitle}" id="webAddressColumnTitle"/>
 							</Column> 
-							<Column id="unitNumberColumn" hAlign="End">
+							<Column id="unitNumberColumn" hAlign="End" sortProperty="Price">
 								<Text text="{i18n>tableUnitNumberColumnTitle}" id="unitNumberColumnTitle"/>
 							</Column>
 						</columns>

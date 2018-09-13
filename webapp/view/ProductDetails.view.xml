@@ -18,7 +18,7 @@
                     <Label id="categoryLabel" text="{i18n>ProductFormCategory}"/>
                     <Text id="category" text="{Category}"/>
                     <Label text="{i18n>ProductFormName}"/>
-                    <Text text="{Name}"/>
+                    <Text text="{Name}"/> 
                     <Label text="{i18n>ProductFormWeight}"/>
                     <Text text="{= ${WeightMeasure} + ' ' + ${WeightUnit}}"/>
                 </f:content>
