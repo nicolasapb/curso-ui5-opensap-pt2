@@ -1,7 +1,9 @@
 <mvc:View 
     xmlns="sap.m" 
     xmlns:mvc="sap.ui.core.mvc" 
+	xmlns:l="sap.ui.layout"
 	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
 	xmlns:semantic="sap.m.semantic"
     controllerName="opensap.manageproducts.ManageProducts.controller.Add">
 
@@ -12,7 +14,60 @@
 		title="{i18n>addProductTitle}">
 
 		<semantic:content> 
-
+			<f:Form 
+				id="form"
+				editable="true"
+				class="sapUiResponsiveMargin">
+				<f:title>
+					<core:Title text="{i18n>formTitle}" />
+				</f:title>
+				<f:layout>
+					<f:ResponsiveGridLayout
+						labelSpanXL="3"
+						labelSpanL="3"
+						labelSpanM="3"
+						labelSpanS="12"
+						adjustLabelSpan="false"
+						emptySpanXL="4"
+						emptySpanL="4"
+						emptySpanM="4"
+						emptySpanS="0"
+						columnsXL="1"
+						columnsL="1"
+						columnsM="1"
+						singleContainerFullSize="false" />
+				</f:layout>
+				<f:formContainers>
+					<f:FormContainer
+						id="formGroup">
+						<f:title>
+							<core:Title text="{i18n>formGroupLabel}" />
+						</f:title>
+						<f:formElements>
+							<f:FormElement label="Name">
+								<f:fields>
+									<Input value="{Name}" id="nameField"/>
+								</f:fields>
+							</f:FormElement> 
+							<f:FormElement label="Category">
+								<f:fields>
+									<Input value="{Category}" id="categoryField"/>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Supplier ID">
+								<f:fields>
+									<Input value="{SupplierID}" id="supplierIDField"/>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Price">
+								<f:fields>
+									<Input value="{Price}" id="priceField" type="sap.m.InputType.Number"/>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
 		</semantic:content>
 
 	</semantic:FullscreenPage>

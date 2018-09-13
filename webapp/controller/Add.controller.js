@@ -23,7 +23,30 @@ sap.ui.define([
             } else {
                 this.getRouter().navTo("worklist", {}, true);
             }
-        }        
+        },
+        
+        _onObjectMatched: function() {
+            
+            var oModel = this.getModel();
+            oModel.metadataLoaded()
+                .then(this._onMetadataLoaded.bind(this));
+        },
+
+        _onMetadataLoaded: function() {
+            var oProperties = {
+                ProductID: "" + parseInt(Math.random() * 1000000000),
+                TypeCode: "PR",
+                TaxTarifCode: "1",
+                CurrencyCode: "EUR",
+                MeasureUnit: "EA"
+            };
+
+            var oContext = this.getModel().createEntry("/ProductSet", {
+                properties: oProperties
+            });
+
+            this.getView().setBindingContext(oContext);
+        }
     });
 
 });

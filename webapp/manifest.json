@@ -70,7 +70,12 @@
 			},
 			"": {
 				"dataSource": "mainService",
-				"preload": true
+				"preload": true,
+				"settings": {
+					"metadataUrlParams": {
+						"defaultBindingMode": "TwoWay"
+					}
+				}
 			}
 		},
 		"routing": {
